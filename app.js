@@ -26,6 +26,37 @@
         paint = false;
     });
 
+	canvas.addEventListener("touchstart", function(e)
+	{
+		// Mouse down location
+		var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
+			mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
+
+		paint = true;
+		addClick(mouseX, mouseY, false);
+		redraw();
+	}, false);
+
+	canvas.addEventListener("touchmove", function(e){
+		var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
+			mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
+
+		if(paint){
+			addClick(mouseX, mouseY, true);
+			redraw();
+		}
+		e.preventDefault()
+	}, false);
+
+	canvas.addEventListener("touchend", function(e){
+		paint = false;
+	  	redraw();
+	}, false);
+
+	canvas.addEventListener("touchcancel", function(e){
+		paint = false;
+	}, false);
+
     var clickX = new Array();
     var clickY = new Array();
     var clickDrag = new Array();
