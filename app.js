@@ -2,60 +2,43 @@
     var canvas = document.getElementById('playground');
     var context = canvas.getContext('2d');
 
-    canvas.addEventListener('mousedown', function(e){
-        var mouseX = e.pageX - this.offsetLeft;
-        var mouseY = e.pageY - this.offsetTop;
+    var drawStart = function(e) {
+        var x = (e.touches ? e.touches[0].pageX : e.pageX) - this.offsetLeft;
+        var y = (e.touches ? e.touches[0].pageY : e.pageY) - this.offsetTop;
 
         paint = true;
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+        addClick(x, y, false);
         redraw();
-    });
+    };
 
-    canvas.addEventListener('mousemove', function(e){
-        if(paint){
-            addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-            redraw();
-        }
-    });
-
-    canvas.addEventListener('mouseup', function(e){
-        paint = false;
-    });
-
-    canvas.addEventListener('mouseleave', function(e){
-        paint = false;
-    });
-
-	canvas.addEventListener("touchstart", function(e)
-	{
-		// Mouse down location
-		var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
-			mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
-
-		paint = true;
-		addClick(mouseX, mouseY, false);
-		redraw();
-	}, false);
-
-	canvas.addEventListener("touchmove", function(e){
-		var mouseX = (e.changedTouches ? e.changedTouches[0].pageX : e.pageX) - this.offsetLeft,
-			mouseY = (e.changedTouches ? e.changedTouches[0].pageY : e.pageY) - this.offsetTop;
-
+    var drawMove = function(e) {
 		if(paint){
-			addClick(mouseX, mouseY, true);
+            var x = (e.touches ? e.touches[0].pageX : e.pageX) - this.offsetLeft;
+            var y = (e.touches ? e.touches[0].pageY : e.pageY) - this.offsetTop;
+			addClick(x, y, true);
 			redraw();
 		}
-		e.preventDefault()
-	}, false);
+    };
 
-	canvas.addEventListener("touchend", function(e){
-		paint = false;
-	  	redraw();
-	}, false);
+    var drawEnd = function(e) {
+        paint = false;
+        redraw();
+    };
 
-	canvas.addEventListener("touchcancel", function(e){
-		paint = false;
-	}, false);
+    var drawCancel = function(e) {
+        paint = false;
+    };
+
+
+    canvas.addEventListener('mousedown', drawStart, false);
+    canvas.addEventListener('mousemove', drawMove, false);
+    canvas.addEventListener('mouseup', drawEnd, false);
+    canvas.addEventListener('mouseleave', drawCancel, false);
+
+	canvas.addEventListener('touchstart', drawStart, false);
+	canvas.addEventListener('touchmove', drawMove, false);
+	canvas.addEventListener('touchend', drawEnd, false);
+	canvas.addEventListener('touchcancel', drawCancel, false);
 
     var clickX = new Array();
     var clickY = new Array();
