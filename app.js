@@ -1,5 +1,6 @@
 (function() {
     var canvas = document.getElementById('playground');
+    var clearButton = document.getElementById('clear');
     var context = canvas.getContext('2d');
 
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -58,6 +59,10 @@
         paint = false;
     };
 
+    var clearCanvas = function() {
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    }
+
     canvas.addEventListener('mousedown', drawStart, false);
     canvas.addEventListener('mousemove', drawMove, false);
     canvas.addEventListener('mouseup', drawEnd, false);
@@ -67,4 +72,6 @@
 	canvas.addEventListener('touchmove', drawMove, false);
 	canvas.addEventListener('touchend', drawEnd, false);
 	canvas.addEventListener('touchcancel', drawCancel, false);
+
+    clear.addEventListener('click', clearCanvas, false);
 }());
