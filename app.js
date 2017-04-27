@@ -38,6 +38,8 @@
   };
 
   var drawMove = function (e) {
+    e.preventDefault();
+
     if (e.buttons || e.touches) {
       var x = (e.touches ? e.touches[0].pageX : e.pageX) - this.offsetLeft;
       var y = (e.touches ? e.touches[0].pageY : e.pageY) - this.offsetTop;
