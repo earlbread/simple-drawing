@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/earlbread/simple-drawing.git",
   "author": "Seunghun Lee <waydi1@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }
