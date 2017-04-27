@@ -1,4 +1,6 @@
-(function() {
+'use strict';
+
+(function () {
   var canvas = document.getElementById('playground');
   var clearButton = document.getElementById('clear');
   var context = canvas.getContext('2d');
@@ -27,7 +29,7 @@
     context.stroke();
   }
 
-  var drawStart = function(e) {
+  var drawStart = function (e) {
     var x = (e.touches ? e.touches[0].pageX : e.pageX) - this.offsetLeft;
     var y = (e.touches ? e.touches[0].pageY : e.pageY) - this.offsetTop;
 
@@ -39,8 +41,8 @@
     draw(x, y, false);
   };
 
-  var drawMove = function(e) {
-    if(paint){
+  var drawMove = function (e) {
+    if (paint) {
       var x = (e.touches ? e.touches[0].pageX : e.pageX) - this.offsetLeft;
       var y = (e.touches ? e.touches[0].pageY : e.pageY) - this.offsetTop;
 
@@ -51,17 +53,17 @@
     }
   };
 
-  var drawEnd = function(e) {
+  var drawEnd = function () {
     paint = false;
   };
 
-  var drawCancel = function(e) {
+  var drawCancel = function () {
     paint = false;
   };
 
-  var clearCanvas = function() {
+  var clearCanvas = function () {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-  }
+  };
 
   canvas.addEventListener('mousedown', drawStart, false);
   canvas.addEventListener('mousemove', drawMove, false);
@@ -73,5 +75,5 @@
   canvas.addEventListener('touchend', drawEnd, false);
   canvas.addEventListener('touchcancel', drawCancel, false);
 
-  clear.addEventListener('click', clearCanvas, false);
+  clearButton.addEventListener('click', clearCanvas, false);
 }());
