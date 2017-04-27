@@ -1,0 +1,8 @@
+{
+  "name": "simple_drawing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/earlbread/simple-drawing.git",
+  "author": "Seunghun Lee <waydi1@gmail.com>",
+  "license": "MIT"
+}
